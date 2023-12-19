@@ -1,18 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMoves : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    public float m_Speed;
+    public float m_JumpForce;
+
+    [SerializeField]
+    public Rigidbody2D m_Rigidb;
+    public Animator m_Animator;
+    public SpriteRenderer spriteRenderer;
+
+
+    [SerializeField]
+    public Transform groundCheckLeft;
+    public Transform groundCheckRight;
+
+    private bool _jumping;
+    private bool _grounded;
+
+    private void Update()
     {
-        
+        if (Input.GetButtonDown("Jump") && _grounded)
+        {
+            _jumping = true;
+        }
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        float characterVelocity = Mathf.Abs(m_Rigidb.velocity.x);
+
+        _grounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
         
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f)
+        {
+           
+            m_Rigidb.velocity = new Vector2(Input.GetAxis("Horizontal") * m_Speed, m_Rigidb.velocity.y);
+        }
+
+        if (_jumping)
+        {
+          
+            m_Rigidb.AddForce(new Vector2(0, m_JumpForce));
+            _jumping = false;
+        }
+
+        Flip(m_Rigidb.velocity.x);
+        m_Animator.SetFloat("Speed", characterVelocity);
+
+    }
+
+    void Flip(float _velocity)
+    {
+        if(_velocity > 0.1f)
+        {
+            spriteRenderer.flipX = false;
+        } else if (_velocity < -0.1f)
+        {
+            spriteRenderer.flipX = true;
+        } 
     }
 }
