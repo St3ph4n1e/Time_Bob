@@ -42,13 +42,13 @@ public class EnnemiPatrol : MonoBehaviour
 
     }
 
-    //public void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.transform.CompareTag("Player"))
-    //    {
-    //        PlayerLife playerLife = collision.transform.GetComponent<PlayerLife>();
-    //        playerLife.TakeDamage(DamageOnCollision);
-    //    }
-    //}
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            PlayerLife playerLife = collision.transform.GetComponent<PlayerLife>();
+            playerLife.TakeDamage(DamageOnCollision);
+        }
+    }
 
 }
