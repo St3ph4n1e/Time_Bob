@@ -1,23 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
     public GameObject[] objects;
-    
-    void Awake()
+
+
+    public static GameManager instance;
+  
+
+    private void Awake()
     {
-        foreach(var elements in objects)
+        if (instance != null)
+        {
+            Debug.LogWarning("Il y a plus d'une instance de GameManager dans la sc?ne");
+            return;
+        }
+
+        instance = this;
+
+
+        foreach (var elements in objects)
         {
             DontDestroyOnLoad(elements);
         }
     }
 
-   
-    void Update()
+
+
+    public void Replay()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    void RemoveDontDestroy()
+    {
+        foreach (var elements in objects)
+        {
+            SceneManager.MoveGameObjectToScene(elements, SceneManager.GetActiveScene());
+        }
+            
     }
 }

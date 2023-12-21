@@ -24,7 +24,21 @@ public class BobbieMoves : MonoBehaviour
     private bool _grounded;
 
 
-  
+    public static BobbieMoves instance;
+
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("Il y a plus d'une instance de BobbieMoves dans la scène");
+            return;
+        }
+
+        instance = this;
+    }
+
+
 
     void Update()
     {
