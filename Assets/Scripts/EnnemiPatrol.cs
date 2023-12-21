@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnnemiPatrol : MonoBehaviour
@@ -11,6 +12,10 @@ public class EnnemiPatrol : MonoBehaviour
     public SpriteRenderer graphics;
     private Transform target;
     private int destPoint = 0;
+    public int DamageOnCollision = 20;
+   
+
+
 
 
 
@@ -32,5 +37,18 @@ public class EnnemiPatrol : MonoBehaviour
             target = waypoints[destPoint];
             graphics.flipX = !graphics.flipX;
         }
+
+        
+
     }
+
+    //public void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.transform.CompareTag("Player"))
+    //    {
+    //        PlayerLife playerLife = collision.transform.GetComponent<PlayerLife>();
+    //        playerLife.TakeDamage(DamageOnCollision);
+    //    }
+    //}
+
 }
