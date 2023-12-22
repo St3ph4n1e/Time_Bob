@@ -1,5 +1,4 @@
 
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Il y a plus d'une instance de GameManager dans la sc?ne");
+            Debug.LogWarning("Il y a plus d'une instance de GameManager dans la scene");
             return;
         }
 
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    void RemoveDontDestroy()
+    public void RemoveDontDestroy()
     {
         foreach (var elements in objects)
         {

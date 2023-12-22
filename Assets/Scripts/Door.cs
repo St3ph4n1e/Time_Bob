@@ -9,7 +9,10 @@ public class Door : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             
-                SceneManager.LoadScene(0);
+            
+            SceneManager.LoadScene(4);
+            GameManager.instance.RemoveDontDestroy();
+            GameManager.instance.enabled = false;
          
         }
     }

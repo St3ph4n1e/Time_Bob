@@ -29,14 +29,20 @@ public class GameOverManager : MonoBehaviour
 
     public void Replay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         gameOverUI.SetActive(false);
+        GameManager.instance.RemoveDontDestroy();
+        GameManager.instance.enabled = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
 
     public void Menu()
     {
-        SceneManager.LoadScene(0);
         gameOverUI.SetActive(false);
+        GameManager.instance.RemoveDontDestroy();
+        GameManager.instance.enabled = false;
+        SceneManager.LoadScene(0);
+        
     }
 
 
